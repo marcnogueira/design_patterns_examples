@@ -148,6 +148,7 @@ O livro "Design Patterns: Elements of Reusable Object-Oriented Software" é ampl
 * **Padrões de Criação**: Tratam da criação de objetos, ajudando a isolar o sistema dos detalhes de como os objetos são criados, compostos e representados. Exemplos incluem o Factory Method, Abstract Factory, Singleton e Prototype.
 * **Padrões Estruturais**: Lidam com a composição de classes ou objetos para formar estruturas maiores. Eles ajudam a criar relações entre objetos de forma flexível e eficiente. Exemplos incluem o Adapter, Composite, Proxy e Bridge.
 * **Padrões Comportamentais**: Fornecem maneiras de definir a comunicação entre objetos de forma flexível. Eles ajudam a garantir que os objetos possam cooperar de maneira eficiente e reutilizável. Exemplos incluem o Observer, Strategy, Command e State.
+
 ![](readme/types_of_patterns.jpg)<!-- {"width":621} -->
 
 O livro "Design Patterns" é frequentemente citado como uma leitura obrigatória para qualquer desenvolvedor de software que deseja compreender melhor a orientação a objetos e a criação de sistemas de software robustos e reutilizáveis. Ele fornece exemplos de código em C++ e Smalltalk, mas os conceitos e princípios dos padrões de projeto são amplamente aplicáveis a muitas linguagens de programação, incluindo Ruby.
