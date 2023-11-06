@@ -90,7 +90,7 @@ Neste exemplo:
 * ConcreteTemplateA é uma das subclasses que herda de AbstractTemplate e fornece implementações para todas as três etapas. Isso significa que ele segue o algoritmo do template, mas com implementações específicas.
 * ConcreteTemplateB é outra subclasse que herda de AbstractTemplate, mas fornece uma implementação personalizada apenas para step_1. As etapas step_2 e step_3 não são implementadas nesta subclasse, o que significa que elas usarão as implementações padrão definidas na classe abstrata.
 
-⠀Aqui está como você pode usar essas classes:
+Aqui está como você pode usar essas classes:
 ```rubytemplate_a = ConcreteTemplateA.new
 template_a.template_method
 
@@ -166,7 +166,7 @@ Aqui estão algumas características de DSLs em Ruby:
 * **Chaining Methods**: O encadeamento de métodos (method chaining) é uma técnica frequentemente usada em DSLs para criar uma sequência de chamadas de métodos que se assemelham a uma linguagem natural.
 * **Configuração Declarativa**: Muitas DSLs em Ruby são usadas para configurar ou descrever configurações de aplicativos ou objetos de uma maneira declarativa.
 
-⠀Aqui está um exemplo simples de uma DSL em Ruby para configuração declarativa:
+Aqui está um exemplo simples de uma DSL em Ruby para configuração declarativa:
 ```ruby
 class Configuration
   attr_accessor :setting1, :setting2
@@ -216,7 +216,7 @@ A metaprogramação em Ruby é baseada em conceitos como reflexão, monkey patch
 * **Criação Dinâmica de Classes e Módulos**: Você pode criar classes e módulos dinamicamente em tempo de execução. Isso é particularmente útil ao criar DSLs ou estruturas flexíveis.
 * **Métodos Missing**: Ruby permite que você defina o método method_missing, que é chamado quando um método não é encontrado em um objeto. Isso é útil para tratar chamadas de métodos inexistentes de maneira personalizada.
 
-⠀Aqui está um exemplo simples de metaprogramação em Ruby que usa reflexão para definir dinamicamente métodos:
+Aqui está um exemplo simples de metaprogramação em Ruby que usa reflexão para definir dinamicamente métodos:
 ```ruby
 class MyClass
   def initialize
