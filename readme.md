@@ -39,6 +39,7 @@ instance1.some_method # Deve chamar o método some_method na instância
 
 Neste exemplo, instance1 e instance2 são ambas referências à mesma instância da classe SingletonExample, garantindo que apenas uma instância seja criada e compartilhada em toda a aplicação. Isso é útil em situações onde você deseja ter um único ponto de acesso global a um recurso ou configuração, como um registro de log ou uma conexão de banco de dados, evitando múltiplas instâncias não necessárias.
 
+
 ### Template Method
 “Classes abstratas e subclasses (solid)”
 
@@ -132,14 +133,26 @@ Isso ilustra como o padrão de projeto Template Method permite que você defina 
 
 O Strategy é um padrão de projeto comportamental que permite que você defina uma família de algoritmos, coloque-os em classes separadas, e faça os objetos deles intercambiáveis.
 
-![](readme/types_of_patterns.jpg)
+
 
 ## Gang of Four (GOF)
-Autores do livro Design Patterns (Padrões de projetos), publicado em 1994.
-- Erich Gamma
-- Richard Helm
-- Ralph Johnson
-- John Vlissides
+O termo "Gang of Four" (GoF) refere-se a um grupo de quatro autores renomados na área de ciência da computação que escreveram o livro "Design Patterns: Elements of Reusable Object-Oriented Software". O livro foi publicado em 1994 e teve um impacto significativo na comunidade de desenvolvedores de software, tornando-se uma referência essencial para o design de software orientado a objetos. Os quatro autores, muitas vezes referidos como a "Gang of Four," são:
+
+* **Erich Gamma**: É conhecido por seu trabalho no desenvolvimento do Eclipse IDE e pelo desenvolvimento do padrão de projeto Singleton, entre outros.
+* **Richard Helm**: Contribuiu para a criação de padrões de projeto, como o Factory Method e o Abstract Factory.
+* **Ralph Johnson**: Foi um dos colaboradores ativos na definição dos padrões de projeto, como o Composite e o Observer.
+* **John Vlissides**: Fez contribuições importantes para a identificação de padrões, incluindo o padrão de projeto Chain of Responsibility e o padrão de projeto State.
+
+O livro "Design Patterns: Elements of Reusable Object-Oriented Software" é amplamente reconhecido por introduzir 23 padrões de projeto, que são soluções para problemas comuns de design de software. Os padrões de projeto fornecidos no livro são categorizados em três grupos principais:
+
+* **Padrões de Criação**: Tratam da criação de objetos, ajudando a isolar o sistema dos detalhes de como os objetos são criados, compostos e representados. Exemplos incluem o Factory Method, Abstract Factory, Singleton e Prototype.
+* **Padrões Estruturais**: Lidam com a composição de classes ou objetos para formar estruturas maiores. Eles ajudam a criar relações entre objetos de forma flexível e eficiente. Exemplos incluem o Adapter, Composite, Proxy e Bridge.
+* **Padrões Comportamentais**: Fornecem maneiras de definir a comunicação entre objetos de forma flexível. Eles ajudam a garantir que os objetos possam cooperar de maneira eficiente e reutilizável. Exemplos incluem o Observer, Strategy, Command e State.
+![](readme/types_of_patterns.jpg)<!-- {"width":621} -->
+
+O livro "Design Patterns" é frequentemente citado como uma leitura obrigatória para qualquer desenvolvedor de software que deseja compreender melhor a orientação a objetos e a criação de sistemas de software robustos e reutilizáveis. Ele fornece exemplos de código em C++ e Smalltalk, mas os conceitos e princípios dos padrões de projeto são amplamente aplicáveis a muitas linguagens de programação, incluindo Ruby.
+O legado dos "Gang of Four" e seu livro é duradouro, e os padrões de projeto apresentados no livro continuam a ser uma referência essencial para o desenvolvimento de software orientado a objetos. Eles ajudaram a estabelecer uma linguagem comum para discutir e projetar sistemas de software e promoveram a reutilização e a manutenibilidade do código em toda a indústria de desenvolvimento de software.
+
 
 ## Patterns para Ruby
 ### Convenção sobre configuração
