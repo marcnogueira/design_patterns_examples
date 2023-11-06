@@ -1,6 +1,18 @@
 # ![](readme/design-patterns-logo-2.png)
-Design Pattern é uma solução geral para um problema que ocorre com frequência em um determinado contexto de engenharia de software.
-(Nome, problema, solução e consequência)
+Design patterns, ou padrões de projeto, são soluções reutilizáveis para problemas comuns de design de software que surgem durante o desenvolvimento de sistemas de software. Eles são abordagens testadas e comprovadas para lidar com desafios de design específicos e fornecem diretrizes sobre como organizar, estruturar e relacionar componentes de software para alcançar uma arquitetura eficaz e flexível.
+
+Os design patterns não são códigos prontos para uso, mas sim modelos conceituais que descrevem a estrutura e as interações entre objetos e componentes de software. Eles são uma forma de documentar as melhores práticas e soluções bem-sucedidas que a comunidade de desenvolvimento de software identificou ao longo do tempo.
+
+Os benefícios dos design patterns incluem:
+
+* **Reutilização de Soluções**: Design patterns fornecem soluções testadas e comprovadas para problemas recorrentes, economizando tempo e esforço.
+* **Comunicação Eficiente**: Eles estabelecem uma linguagem comum que os desenvolvedores podem usar para comunicar soluções de design complexas de maneira mais eficaz.
+* **Manutenibilidade**: Padrões de projeto facilitam a manutenção do código, uma vez que as soluções estão estruturadas de forma clara e organizada.
+* **Flexibilidade e Extensibilidade**: Eles promovem a flexibilidade e a extensibilidade do software, permitindo que novas funcionalidades sejam adicionadas com menos impacto nas partes existentes do sistema.
+
+Alguns exemplos de design patterns amplamente conhecidos incluem o Singleton, o Observer, o Factory Method, o Strategy e o Adapter, entre outros. Cada padrão aborda um conjunto específico de problemas e fornece uma abordagem de resolução de problemas comprovada.
+No geral, os design patterns são valiosos para desenvolvedores de software, pois fornecem um conjunto de ferramentas conceituais para criar software mais robusto, flexível e fácil de manter. Eles são uma parte importante do conhecimento fundamental em engenharia de software e são amplamente utilizados na indústria de desenvolvimento de software.
+
 
 ## Principais Tipos (Famílias: Criacionais, Estruturais e Comportamentais)
 ### Singleton
