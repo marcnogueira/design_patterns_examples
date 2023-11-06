@@ -154,7 +154,7 @@ No contexto do Ruby on Rails, algumas convenções sobre configuração incluem:
 * **Helpers e Partials**: Rails fornece helpers e partials (trechos reutilizáveis de visualização) que são automaticamente disponíveis e carregados, seguindo as convenções.
 * **Testes e Fixtures**: O Rails fornece convenções para estruturar testes e fixtures, o que torna mais fácil escrever e executar testes.
 
-⠀No geral, o padrão CoC em Ruby e no framework Rails permite que os desenvolvedores se concentrem mais na lógica de negócios de seus aplicativos em vez de configurar todos os detalhes técnicos. Isso leva a um código mais limpo, menos código repetitivo e uma maior produtividade, tornando Ruby on Rails um framework popular para o desenvolvimento web.
+No geral, o padrão CoC em Ruby e no framework Rails permite que os desenvolvedores se concentrem mais na lógica de negócios de seus aplicativos em vez de configurar todos os detalhes técnicos. Isso leva a um código mais limpo, menos código repetitivo e uma maior produtividade, tornando Ruby on Rails um framework popular para o desenvolvimento web.
 
 ### Domain Specific Language (DSL)
 O padrão de projeto "Domain-Specific Language" (DSL), que pode ser traduzido como "Linguagem Específica de Domínio," não é estritamente um padrão de projeto no mesmo sentido que o Singleton ou o Observer. Em vez disso, ele se refere a uma abordagem para criar uma linguagem de programação ou uma sintaxe específica para resolver problemas em um domínio de aplicação particular.
