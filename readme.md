@@ -93,6 +93,7 @@ Neste exemplo:
 
 Aqui está como você pode usar essas classes:
 ```rubytemplate_a = ConcreteTemplateA.new
+template_a = ConcreteTemplateA.new
 template_a.template_method
 
 template_b = ConcreteTemplateB.new
