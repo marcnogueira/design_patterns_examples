@@ -557,6 +557,7 @@ Neste exemplo, o método define_method permite que você defina dinamicamente m�
 Embora a metaprogramação em Ruby seja uma ferramenta poderosa, é importante usá-la com responsabilidade, pois pode tornar o código mais difícil de entender e depurar. É crucial documentar adequadamente o código e seguir boas práticas de programação ao fazer uso extensivo da metaprogramação para evitar surpresas e erros difíceis de rastrear.
 
 ## Referências
+- [Padrões de Projeto em Ruby](https://refactoring.guru/pt-br/design-patterns/ruby)
 - [Padrões de Projeto \(Design Patterns - GoF\) - Introdução - Parte 1/45](https://www.youtube.com/watch?v=MqddY6Ochkc&list=PLbIBj8vQhvm0VY5YrMrafWaQY2EnJ3j8H)
 - [Identifique Quando e Como Usar o Design Pattern Strategy na Prática](https://youtube.com/watch?v=WPdrnuSHAQs)
 - [O Programador Pragmático: De Aprendiz a Mestre](https://www.amazon.com.br/Programador-Pragm%C3%A1tico-Aprendiz-Mestre-ebook/dp/B019HM0H90/?_encoding=UTF8&ref_=pd_wlh&pd_rd_w=Ddp4y&content-id=amzn1.sym.ae4503e4-d79b-4f55-9cce-74403ff8b2f2&pf_rd_p=ae4503e4-d79b-4f55-9cce-74403ff8b2f2&pf_rd_r=G86JXXJC217VZ9BM3SW9&pd_rd_wg=m5Btb&pd_rd_r=9ad65181-57ae-4813-82e8-eca52b8446b8)
