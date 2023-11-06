@@ -420,23 +420,552 @@ O padrão Command permite encapsular solicitações como objetos, fornecendo um 
 ### Decorator
 “Varia a responsabilidade de um objeto adicionando algum recurso.”
 
+O padrão de projeto Decorator é um padrão de projeto estrutural que permite adicionar comportamento adicional a objetos individuais, dinamicamente, sem afetar a estrutura da classe subjacente. Ele envolve a criação de uma série de classes decoradoras que são aninhadas e envolvem o objeto original. Cada decorador adiciona responsabilidades ou funcionalidades específicas sem alterar o objeto base. Aqui está um exemplo em Ruby que demonstra o padrão Decorator:
+```ruby
+# Component (Componente): Define uma interface para os objetos que podem ser decorados.
+class Coffee
+  def cost
+    5
+  end
+
+  def description
+    "Café simples"
+  end
+end
+
+# Decorator (Decorador): Mantém uma referência para um objeto Component e define uma interface compatível.
+class CoffeeDecorator
+  def initialize(coffee)
+    @coffee = coffee
+  end
+
+  def cost
+    @coffee.cost
+  end
+
+  def description
+    @coffee.description
+  end
+end
+
+# ConcreteDecorator (Decorador Concreto): Adiciona funcionalidade específica ao objeto Component.
+class MilkDecorator < CoffeeDecorator
+  def cost
+    @coffee.cost + 2
+  end
+
+  def description
+    @coffee.description + ", com leite"
+  end
+end
+
+class SugarDecorator < CoffeeDecorator
+  def cost
+    @coffee.cost + 1
+  end
+
+  def description
+    @coffee.description + ", com açúcar"
+  end
+end
+
+# Uso do padrão Decorator
+simple_coffee = Coffee.new
+puts "Café simples custa #{simple_coffee.cost} reais. Descrição: #{simple_coffee.description}"
+
+milk_coffee = MilkDecorator.new(simple_coffee)
+puts "Café com leite custa #{milk_coffee.cost} reais. Descrição: #{milk_coffee.description}"
+
+sugar_milk_coffee = SugarDecorator.new(milk_coffee)
+puts "Café com leite e açúcar custa #{sugar_milk_coffee.cost} reais. Descrição: #{sugar_milk_coffee.description}"
+```
+Neste exemplo:
+
+* Coffee é a classe que representa o componente base. Ela define métodos cost (custo) e description (descrição).
+* CoffeeDecorator é a classe decoradora abstrata que mantém uma referência para um objeto Coffee. Ela também implementa os métodos cost e description da interface Component.
+* MilkDecorator e SugarDecorator são decoradores concretos que herdam de CoffeeDecorator e adicionam funcionalidades específicas, como adicionar leite ou açúcar ao café. Eles substituem os métodos cost e description para adicionar o custo e a descrição dos ingredientes extras.
+* O código final demonstra como criar uma sequência de decoradores para adicionar funcionalidades extras a um café simples. Os decoradores podem ser aninhados de forma flexível para criar diferentes combinações de funcionalidades.
+
+O padrão Decorator é útil quando você precisa adicionar funcionalidades a objetos individualmente e de maneira flexível, sem criar uma hierarquia de subclasses complicada. Ele segue o princípio aberto/fechado do SOLID (Open/Closed Principle), que permite estender o comportamento sem modificar o código existente. Isso torna o código mais modular e fácil de manter.
+
 ### Factory
 “Cria objetos sem ter que especificar a classe do objeto que irá ser criado.”
+
+O padrão de projeto Factory é um padrão de criação que fornece uma interface para criar objetos em uma superclasse, mas permite que as subclasses alterem o tipo de objetos que serão criados. Ele é útil quando você deseja criar objetos com uma interface comum, mas com comportamentos específicos implementados por subclasses. Vou fornecer um exemplo em Ruby que demonstra o padrão Factory:
+```ruby
+# Classe Product (Produto): Representa o produto comum que pode ser criado por diferentes fábricas.
+class Product
+  def initialize(name)
+    @name = name
+  end
+
+  def description
+    "Produto: #{@name}"
+  end
+end
+
+# Factory (Fábrica): Define a interface para a criação de produtos.
+class ProductFactory
+  def create_product(name)
+    raise NotImplementedError, "As subclasses devem implementar o método create_product."
+  end
+end
+
+# ConcreteFactory (Fábrica Concreta): Implementa a criação de um tipo específico de produto.
+class ConcreteProductFactoryA < ProductFactory
+  def create_product(name)
+    Product.new("Tipo A - #{name}")
+  end
+end
+
+class ConcreteProductFactoryB < ProductFactory
+  def create_product(name)
+    Product.new("Tipo B - #{name}")
+  end
+end
+
+# Uso do padrão Factory
+factory_a = ConcreteProductFactoryA.new
+product_a = factory_a.create_product("Produto A")
+puts product_a.description
+
+factory_b = ConcreteProductFactoryB.new
+product_b = factory_b.create_product("Produto B")
+puts product_b.description
+```
+
+Neste exemplo:
+
+* Product é a classe que representa o produto comum que pode ser criado por diferentes fábricas. Ela possui um método description para descrever o produto.
+* ProductFactory é a classe abstrata que define a interface para a criação de produtos. Subclasses de ProductFactory implementarão o método create_product.
+* ConcreteProductFactoryA e ConcreteProductFactoryB são fábricas concretas que herdam de ProductFactory e implementam o método create_product para criar produtos específicos.
+* No uso do padrão Factory, duas fábricas concretas (ConcreteProductFactoryA e ConcreteProductFactoryB) são criadas e usadas para criar produtos com comportamentos específicos. O cliente (o código que utiliza as fábricas) chama o método create_product na fábrica apropriada para criar os produtos.
+
+O padrão Factory é útil quando você deseja criar objetos com uma interface comum, mas com diferentes implementações específicas. Ele permite que o código do cliente trabalhe com a interface comum, sem se preocupar com os detalhes da criação de objetos. Isso torna o sistema mais flexível e extensível, pois você pode adicionar novas fábricas para criar diferentes tipos de produtos sem modificar o código existente.
 
 ### Interpreter
 “Fornece uma linguagem especializada para resolver um problema bem definido de um domínio conhecido.”
 
-### Interator
+O padrão de projeto Interpreter é um padrão de projeto comportamental que é usado para definir a gramática da linguagem e interpretar sentenças em uma linguagem específica. Ele é útil quando você deseja criar um interpretador para uma linguagem personalizada ou ao lidar com expressões regulares, análise de linguagem natural ou outras formas de análise textual. No entanto, a implementação desse padrão pode ser complexa e não é muito comum no desenvolvimento de aplicativos convencionais. Vou fornecer um exemplo simplificado em Ruby que demonstra o conceito do padrão Interpreter:
+Neste exemplo, vamos criar um interpretador simples para avaliar expressões aritméticas básicas, como adição e subtração.
+```ruby
+# Context (Contexto): Define o contexto da interpretação, mantendo informações relevantes.
+class Context
+  attr_accessor :input, :output
+
+  def initialize(input)
+    @input = input
+    @output = 0
+  end
+end
+
+# AbstractExpression (Expressão Abstrata): Define a interface para a interpretação das expressões.
+class AbstractExpression
+  def interpret(context)
+    raise NotImplementedError, "Subclasses devem implementar o método interpret."
+  end
+end
+
+# TerminalExpression (Expressão Terminal): Implementa a interpretação de valores simples.
+class TerminalExpression < AbstractExpression
+  def interpret(context)
+    context.output = context.input.to_i
+  end
+end
+
+# NonTerminalExpression (Expressão Não Terminal): Implementa a interpretação de operações aritméticas.
+class AddExpression < AbstractExpression
+  def interpret(context)
+    context.output += context.input
+  end
+end
+
+class SubtractExpression < AbstractExpression
+  def interpret(context)
+    context.output -= context.input
+  end
+end
+
+# Uso do padrão Interpreter
+context = Context.new(10)
+
+expression1 = TerminalExpression.new
+expression2 = AddExpression.new
+expression3 = TerminalExpression.new
+expression4 = SubtractExpression.new
+expression5 = TerminalExpression.new
+
+expressions = [expression1, expression2, expression3, expression4, expression5]
+
+expressions.each { |expression| expression.interpret(context) }
+
+puts "Resultado: #{context.output}"
+```
+
+Neste exemplo:
+
+* Context mantém as informações relevantes para a interpretação, como a entrada e a saída.
+* AbstractExpression é a classe abstrata que define a interface para a interpretação de expressões.
+* TerminalExpression e NonTerminalExpression são subclasses de AbstractExpression que implementam a interpretação de valores simples e operações aritméticas, respectivamente.
+* No uso do padrão Interpreter, as expressões são organizadas em uma sequência e interpretadas uma a uma usando o contexto. A interpretação ocorre conforme a sequência das expressões, permitindo que expressões aritméticas sejam avaliadas.
+
+Este é um exemplo simplificado do padrão Interpreter. Em implementações mais complexas, o padrão Interpreter pode ser usado para interpretar expressões em uma linguagem personalizada ou para construir analisadores mais elaborados.
+
+### Iterator
 “Fornece uma maneira de acessar uma coleção de sub objetos sem expor a representação subjacente.”
+
+O padrão de projeto Iterator é um padrão de projeto comportamental que fornece uma maneira de acessar os elementos de um objeto agregado (como uma lista ou coleção) de maneira sequencial, sem expor sua representação interna. O Iterator permite que você percorra os elementos de uma coleção sem se preocupar com os detalhes de como essa coleção é implementada. Vou fornecer um exemplo em Ruby que demonstra o padrão Iterator:
+```ruby
+# Aggregate (Agregado): Define a interface para criar um objeto iterador.
+class Aggregate
+  def create_iterator
+    raise NotImplementedError, "Subclasses devem implementar o método create_iterator."
+  end
+end
+
+# ConcreteAggregate (Agregado Concreto): Implementa a interface de criação de um objeto iterador.
+class ConcreteAggregate
+  attr_reader :data
+
+  def initialize
+    @data = []
+  end
+
+  def <<(item)
+    @data << item
+  end
+
+  def create_iterator
+    Iterator.new(self)
+  end
+end
+
+# Iterator (Iterador): Define a interface para acessar e percorrer os elementos.
+class Iterator
+  def initialize(aggregate)
+    @aggregate = aggregate
+    @index = 0
+  end
+
+  def first
+    @index = 0
+  end
+
+  def next
+    @index += 1
+  end
+
+  def current_item
+    @aggregate.data[@index]
+  end
+
+  def is_done
+    @index >= @aggregate.data.length
+  end
+end
+
+# Uso do padrão Iterator
+aggregate = ConcreteAggregate.new
+aggregate << "Item 1"
+aggregate << "Item 2"
+aggregate << "Item 3"
+
+iterator = aggregate.create_iterator
+
+while !iterator.is_done
+  puts "Elemento atual: #{iterator.current_item}"
+  iterator.next
+end
+```
+
+Neste exemplo:
+
+* Aggregate é a classe abstrata que define a interface para criar um objeto iterador.
+* ConcreteAggregate é uma implementação concreta do agregado. Ele armazena os elementos em um array e implementa o método create_iterator para criar um objeto Iterator.
+* Iterator é a classe que define a interface para acessar e percorrer os elementos do agregado. Ele mantém uma referência ao agregado e controla o índice de acesso aos elementos.
+* No uso do padrão Iterator, a agregação (neste caso, ConcreteAggregate) cria um iterador (neste caso, Iterator). O iterador é usado para percorrer os elementos da agregação sem expor os detalhes de sua implementação interna.
+* O loop while é usado para percorrer os elementos do agregado usando o iterador. O iterador controla o acesso e a iteração pelos elementos.
+
+O padrão Iterator é útil quando você deseja separar o acesso aos elementos de uma coleção de sua implementação interna. Isso torna o código mais flexível e permite que você acesse os elementos de maneira sequencial, independentemente da estrutura subjacente da coleção. É comumente usado em Ruby ao trabalhar com coleções, como arrays e listas, onde você deseja percorrer os elementos sem se preocupar com os detalhes de sua representação interna.
+
 
 ### Proxy
 “Nos dá um pouco mais de controle sobre como e onde nós acessamos um certo objeto.”
 
+O padrão de projeto Proxy é um padrão de projeto estrutural que fornece um substituto ou representante para outro objeto para controlar o acesso a ele. Isso é útil quando você deseja adicionar uma camada de controle sobre o acesso a um objeto, como adicionar lógica de cache, restrições de acesso, carregamento preguiçoso ou monitoramento. Vou fornecer um exemplo em Ruby que demonstra o padrão Proxy:
+Neste exemplo, criaremos um proxy para um objeto Image para carregar uma imagem apenas quando ela for realmente necessária, economizando recursos.
+```ruby
+# Subject (Assunto): Define a interface do objeto real e do proxy.
+class Image
+  def display
+    raise NotImplementedError, "Subclasses devem implementar o método display."
+  end
+end
+
+# RealSubject (Assunto Real): Implementa o objeto real que o proxy representa.
+class RealImage < Image
+  def initialize(filename)
+    @filename = filename
+    load_image
+  end
+
+  def display
+    puts "Exibindo imagem: #{@filename}"
+  end
+
+  private
+
+  def load_image
+    puts "Carregando imagem: #{@filename}"
+    # Simula o carregamento de uma imagem.
+  end
+end
+
+# Proxy (Proxy): Mantém uma referência ao objeto real e fornece uma interface idêntica.
+class ImageProxy < Image
+  def initialize(filename)
+    @filename = filename
+    @real_image = nil
+  end
+
+  def display
+    load_real_image unless @real_image
+    @real_image.display
+  end
+
+  private
+
+  def load_real_image
+    @real_image = RealImage.new(@filename)
+  end
+end
+
+# Uso do padrão Proxy
+image = ImageProxy.new("sample.jpg")
+
+# A imagem não é carregada até que seja realmente necessária.
+image.display
+
+# Quando a imagem é exibida pela primeira vez, ela é carregada.
+image.display
+```
+
+Neste exemplo:
+
+* Image é a classe abstrata que define a interface para o objeto real e o proxy.
+* RealImage é o objeto real que implementa a exibição de imagens. Ele carrega a imagem do disco quando é instanciado.
+* ImageProxy é o proxy que mantém uma referência ao objeto real (RealImage). Ele controla o acesso ao objeto real e carrega a imagem apenas quando necessário.
+* No uso do padrão Proxy, a imagem não é carregada até que seja solicitada para exibição. O proxy carrega o objeto real (RealImage) apenas quando a exibição é chamada pela primeira vez.
+
+O padrão Proxy é útil em situações em que você deseja adicionar uma camada de controle sobre o acesso a um objeto, como adiar a criação de objetos caros, implementar lógica de cache, monitorar o acesso ou restringir o acesso a certos usuários. Ele permite a implementação de comportamentos adicionais sem modificar a classe do objeto real, tornando o código mais flexível e escalável.
+
+
 ### Strategy
 “Varia parte de um algoritmo em tempo de execução.”
 
-O Strategy é um padrão de projeto comportamental que permite que você defina uma família de algoritmos, coloque-os em classes separadas, e faça os objetos deles intercambiáveis.
+O padrão de projeto Strategy é um padrão de projeto comportamental que permite definir uma família de algoritmos, encapsulá-los e torná-los intercambiáveis. Isso permite que o cliente escolha o algoritmo a ser usado em tempo de execução, sem alterar a classe do contexto. Aqui está um exemplo em Ruby que demonstra o padrão Strategy:
+Neste exemplo, consideraremos um sistema de cálculo de impostos com diferentes estratégias de cálculo de impostos (imposto sobre vendas, imposto sobre valor agregado, etc.) que podem ser aplicadas a diferentes produtos.
+```ruby
+# Strategy (Estratégia): Define a interface para todas as estratégias de cálculo de impostos.
+class TaxStrategy
+  def calculate_tax(product_price)
+    raise NotImplementedError, "Subclasses devem implementar o método calculate_tax."
+  end
+end
 
+# ConcreteStrategy (Estratégia Concreta): Implementa uma estratégia específica de cálculo de impostos.
+class SalesTax < TaxStrategy
+  def calculate_tax(product_price)
+    product_price * 0.1 # Imposto sobre vendas de 10%
+  end
+end
+
+class VAT < TaxStrategy
+  def calculate_tax(product_price)
+    product_price * 0.2 # Imposto sobre valor agregado de 20%
+  end
+end
+
+# Context (Contexto): Mantém uma referência a uma estratégia de cálculo de impostos e a utiliza.
+class TaxCalculator
+  def initialize(tax_strategy)
+    @tax_strategy = tax_strategy
+  end
+
+  def calculate(product_price)
+    @tax_strategy.calculate_tax(product_price)
+  end
+end
+
+# Uso do padrão Strategy
+product_price = 100.0
+
+# Calcula o imposto sobre vendas
+sales_tax_calculator = TaxCalculator.new(SalesTax.new)
+sales_tax = sales_tax_calculator.calculate(product_price)
+puts "Imposto sobre vendas: #{sales_tax}"
+
+# Calcula o imposto sobre valor agregado
+vat_calculator = TaxCalculator.new(VAT.new)
+vat = vat_calculator.calculate(product_price)
+puts "Imposto sobre valor agregado: #{vat}"
+```
+
+Neste exemplo:
+
+* TaxStrategy é a classe abstrata que define a interface para todas as estratégias de cálculo de impostos. Ela declara o método calculate_tax que deve ser implementado pelas estratégias concretas.
+* SalesTax e VAT são estratégias concretas que implementam estratégias específicas de cálculo de impostos, como o imposto sobre vendas e o imposto sobre valor agregado. Cada uma implementa o método calculate_tax de acordo com a lógica específica do imposto.
+* TaxCalculator é o contexto que mantém uma referência a uma estratégia de cálculo de impostos e a utiliza para calcular o imposto com base no preço do produto.
+* No uso do padrão Strategy, criamos instâncias de TaxCalculator com diferentes estratégias de cálculo de impostos e calculamos os impostos com base no preço do produto. O cliente pode escolher qual estratégia de cálculo de impostos usar em tempo de execução, sem modificar o código do contexto.
+
+O padrão Strategy é útil quando você tem várias maneiras de executar uma tarefa e deseja permitir que o cliente escolha a estratégia apropriada com base em suas necessidades. Ele ajuda a evitar a duplicação de código, torna o código mais flexível e facilita a adição de novas estratégias no futuro.
+
+### Chain of Responsibility
+O padrão de projeto Chain of Responsibility é um padrão comportamental que permite que você passe solicitações por uma cadeia de manipuladores. Cada manipulador decide se deve processar a solicitação ou passá-la para o próximo manipulador na cadeia. Isso é útil quando você deseja desacoplar o remetente de uma solicitação do receptor e permitir que vários objetos processem a solicitação. Aqui está um exemplo em Ruby que demonstra o padrão Chain of Responsibility:
+Neste exemplo, criaremos uma cadeia de manipuladores para aprovar solicitações de compra com base em seu valor.
+```ruby
+# Handler (Manipulador): Define a interface para os manipuladores e contém uma referência ao próximo manipulador na cadeia.
+class PurchaseApprover
+  attr_writer :next_approver
+
+  def approve(purchase)
+    if can_approve?(purchase)
+      puts "#{self.class.name} aprovou a compra de #{purchase.amount} reais."
+    elsif @next_approver
+      @next_approver.approve(purchase)
+    else
+      puts "Nenhum manipulador pôde aprovar a compra de #{purchase.amount} reais."
+    end
+  end
+
+  def can_approve?(purchase)
+    raise NotImplementedError, "Subclasses devem implementar o método can_approve?."
+  end
+end
+
+# ConcreteHandler (Manipulador Concreto): Implementa a lógica de aprovação específica.
+class ManagerApprover < PurchaseApprover
+  def can_approve?(purchase)
+    purchase.amount <= 1000
+  end
+end
+
+class DirectorApprover < PurchaseApprover
+  def can_approve?(purchase)
+    purchase.amount <= 5000
+  end
+end
+
+class CEOApprover < PurchaseApprover
+  def can_approve?(purchase)
+    true
+  end
+end
+
+# Request (Solicitação): Representa a solicitação a ser aprovada.
+class Purchase
+  attr_reader :amount
+
+  def initialize(amount)
+    @amount = amount
+  end
+end
+
+# Uso do padrão Chain of Responsibility
+manager = ManagerApprover.new
+director = DirectorApprover.new
+ceo = CEOApprover.new
+
+manager.next_approver = director
+director.next_approver = ceo
+
+p1 = Purchase.new(800)
+p2 = Purchase.new(3500)
+p3 = Purchase.new(10000)
+
+manager.approve(p1)
+manager.approve(p2)
+manager.approve(p3)
+```
+
+Neste exemplo:
+
+* PurchaseApprover é a classe abstrata que define a interface para os manipuladores e contém uma referência ao próximo manipulador na cadeia. Ela também define o método approve, que decide se pode aprovar a compra ou passá-la para o próximo manipulador.
+* ManagerApprover, DirectorApprover e CEOApprover são manipuladores concretos que implementam a lógica de aprovação específica. Cada um implementa o método can_approve? para decidir se pode aprovar a compra com base em seu valor.
+* No uso do padrão Chain of Responsibility, criamos uma cadeia de manipuladores encadeados. O gerente, diretor e CEO são conectados em ordem, e a solicitação é passada ao longo da cadeia até que seja aprovada ou rejeitada por um manipulador.
+* As solicitações de compra (p1, p2 e p3) são processadas pela cadeia de manipuladores. O primeiro manipulador apropriado aprova a compra, ou a solicitação é rejeitada se nenhum manipulador puder aprová-la.
+
+O padrão Chain of Responsibility é útil quando você deseja desacoplar o remetente de uma solicitação de seus receptores e permitir que vários objetos processem a solicitação, com cada manipulador decidindo se pode ou não aprovar a solicitação. Ele facilita a adição ou remoção de manipuladores sem afetar o código do cliente e permite uma lógica de aprovação flexível.
+
+### State
+O padrão de projeto State é um padrão comportamental que permite que um objeto altere seu comportamento quando seu estado interno muda. Ele é útil quando um objeto precisa se comportar de maneiras diferentes em diferentes estados e quando você deseja evitar uma grande quantidade de condicionais em seu código. Vou fornecer um exemplo em Ruby que demonstra o padrão State:
+Neste exemplo, criaremos um simulador de pedido online que passa por vários estados, como pedido feito, pedido pago e pedido enviado.
+```ruby
+# Context (Contexto): Mantém uma referência para um objeto State e delega a ele o comportamento específico.
+class Order
+  attr_accessor :state
+
+  def initialize
+    @state = OrderPlacedState.new
+  end
+
+  def process
+    @state.process(self)
+  end
+end
+
+# State (Estado): Define uma interface para encapsular o comportamento associado a um estado.
+class OrderState
+  def process(order)
+    raise NotImplementedError, "Subclasses devem implementar o método process."
+  end
+end
+
+# ConcreteState (Estado Concreto): Implementa o comportamento associado a um estado específico.
+class OrderPlacedState < OrderState
+  def process(order)
+    puts "Pedido colocado. Aguardando pagamento."
+    order.state = PaymentReceivedState.new
+  end
+end
+
+class PaymentReceivedState < OrderState
+  def process(order)
+    puts "Pagamento recebido. Preparando para envio."
+    order.state = OrderShippedState.new
+  end
+end
+
+class OrderShippedState < OrderState
+  def process(order)
+    puts "Pedido enviado. Entrega em andamento."
+    order.state = OrderDeliveredState.new
+  end
+end
+
+class OrderDeliveredState < OrderState
+  def process(order)
+    puts "Pedido entregue com sucesso."
+  end
+end
+
+# Uso do padrão State
+order = Order.new
+
+order.process
+order.process
+order.process
+order.process
+```
+
+Neste exemplo:
+
+* Order é o contexto que mantém uma referência para um objeto OrderState e delega a ele o comportamento específico. Inicialmente, o pedido é colocado em OrderPlacedState.
+* OrderState é a classe abstrata que define a interface para encapsular o comportamento associado a um estado.
+* OrderPlacedState, PaymentReceivedState, OrderShippedState e OrderDeliveredState são estados concretos que implementam o comportamento associado a estados específicos. Cada estado altera o estado do pedido para o próximo passo no processo.
+* No uso do padrão State, o pedido passa por uma sequência de estados à medida que é processado. Cada estado é responsável por definir o próximo estado com base no progresso do pedido.
+
+O padrão State é útil quando um objeto precisa se comportar de maneiras diferentes em diferentes estados e quando você deseja evitar condicionais complexos para gerenciar o comportamento do objeto. Ele promove um código mais modular, flexível e extensível, pois permite adicionar novos estados e comportamentos sem afetar o código existente.
 
 
 ## Gang of Four (GOF)
