@@ -22,7 +22,9 @@ class SingletonExample
   end
 end
 ```
+
 Neste exemplo:
+
 * A classe SingletonExample tem um método privado de classe new, que impede a criação de instâncias da classe a partir de fora da classe.
 * O método instance é definido como um método de classe público. Este método cria uma instância da classe se ainda não existir (usando a variável de classe @instance) ou retorna a instância já existente.
 * A classe SingletonExample contém um método chamado some_method, que é apenas um exemplo de um método que a instância da classe pode ter.
@@ -86,7 +88,9 @@ class ConcreteTemplateB < AbstractTemplate
   end
 end
 ```
+
 Neste exemplo:
+
 * AbstractTemplate é a classe abstrata que define o algoritmo em três etapas usando o método template_method. Cada uma das etapas é definida como métodos abstratos (step_1, step_2, step_3) que devem ser implementados pelas subclasses.
 * ConcreteTemplateA é uma das subclasses que herda de AbstractTemplate e fornece implementações para todas as três etapas. Isso significa que ele segue o algoritmo do template, mas com implementações específicas.
 * ConcreteTemplateB é outra subclasse que herda de AbstractTemplate, mas fornece uma implementação personalizada apenas para step_1. As etapas step_2 e step_3 não são implementadas nesta subclasse, o que significa que elas usarão as implementações padrão definidas na classe abstrata.
@@ -105,14 +109,301 @@ Isso ilustra como o padrão de projeto Template Method permite que você defina 
 ### Observer
 “Observar estados de um objeto, que afete o estado de um segundo objeto.”
 
+O padrão Observer é um padrão de projeto comportamental que define uma relação de um-para-muitos entre objetos, de modo que quando um objeto (o "sujeito") muda de estado, todos os seus observadores são notificados e atualizados automaticamente. Isso é útil quando você tem objetos que precisam reagir a mudanças em outros objetos sem acoplamento direto entre eles. Vou fornecer um exemplo em Ruby que demonstra o padrão Observer:
+```ruby
+# Subject (Sujeito): O objeto que está sendo observado.
+class WeatherStation
+  attr_accessor :temperature
+  attr_reader :observers
+
+  def initialize
+    @observers = []
+    @temperature = 0
+  end
+
+  def add_observer(observer)
+    @observers << observer
+  end
+
+  def remove_observer(observer)
+    @observers.delete(observer)
+  end
+
+  def update_temperature(temperature)
+    @temperature = temperature
+    notify_observers
+  end
+
+  def notify_observers
+    @observers.each { |observer| observer.update(self) }
+  end
+end
+
+# Observer (Observador): Os objetos que desejam ser notificados sobre mudanças no sujeito.
+class TemperatureDisplay
+  def update(weather_station)
+    puts "A temperatura atual é #{weather_station.temperature}°C"
+  end
+end
+
+class PhoneApp
+  def update(weather_station)
+    puts "Atualização do aplicativo: A temperatura mudou para #{weather_station.temperature}°C"
+  end
+end
+
+# Criando instâncias
+weather_station = WeatherStation.new
+display_observer = TemperatureDisplay.new
+app_observer = PhoneApp.new
+
+# Registrando observadores
+weather_station.add_observer(display_observer)
+weather_station.add_observer(app_observer)
+
+# Simulando uma mudança na temperatura
+weather_station.update_temperature(25)
+```
+
+Neste exemplo:
+
+* WeatherStation é o sujeito que mantém a temperatura atual. Ele tem métodos para adicionar, remover e notificar observadores.
+* TemperatureDisplay e PhoneApp são observadores que desejam ser notificados sobre mudanças na temperatura. Eles implementam um método update que é chamado quando o sujeito notifica uma mudança.
+* As instâncias de TemperatureDisplay e PhoneApp são registradas como observadores da estação meteorológica.
+* Quando a temperatura na estação meteorológica muda (simulada por update_temperature), os observadores são notificados e seus métodos update são chamados.
+
+Isso demonstra como o padrão Observer permite que objetos (observadores) se inscrevam para receber notificações de mudanças em outro objeto (sujeito) sem acoplamento direto. Isso torna o código mais flexível e permite que você estenda a funcionalidade de maneira modular, adicionando ou removendo observadores conforme necessário.
+
 ### Adapter
-“Ajuda a duas interfaces distintas (incompatíveis?) a trabalhar em conjunto.”
+“Ajuda a duas interfaces incompatíveis a trabalhar em conjunto.”
+
+O padrão Adapter é um padrão de projeto estrutural que permite que objetos com interfaces incompatíveis trabalhem juntos. Ele é útil quando você deseja que um objeto funcione com outro objeto que tenha uma interface diferente. Vou fornecer um exemplo em Ruby que demonstra o padrão Adapter:
+Imagine que temos uma classe OldSystem com um método legacy_method que precisa ser usado por um novo sistema, mas a interface do novo sistema espera um método chamado new_method. Vamos criar um adaptador para que o novo sistema possa usar o método legacy_method da classe OldSystem.
+```ruby
+# Classe existente (incompatível com a nova interface)
+class OldSystem
+  def legacy_method
+    "Método legado está funcionando."
+  end
+end
+
+# Interface esperada pelo novo sistema
+class NewSystem
+  def new_method
+    "Método novo está funcionando."
+  end
+end
+
+# Adaptador para permitir que OldSystem funcione com NewSystem
+class Adapter
+  def initialize(old_system)
+    @old_system = old_system
+  end
+
+  def new_method
+    @old_system.legacy_method
+  end
+end
+
+# Criar instâncias
+old_system = OldSystem.new
+adapter = Adapter.new(old_system)
+new_system = NewSystem.new
+
+# Usar o adaptador para chamar o método novo da interface do novo sistema
+result = new_system.new_method
+puts result
+
+# Usar o adaptador para chamar o método legado da interface do sistema antigo
+legacy_result = adapter.new_method
+puts legacy_result
+```
+
+Neste exemplo:
+
+* OldSystem é a classe existente que possui o método legacy_method, que é incompatível com a nova interface NewSystem.
+* NewSystem é a interface esperada pelo novo sistema, que possui o método new_method.
+* Adapter é uma classe adaptadora que recebe uma instância de OldSystem no construtor e implementa o método new_method da interface NewSystem chamando o método legacy_method da instância de OldSystem. Isso permite que OldSystem funcione com a nova interface sem modificar o código original.
+* Usando o adaptador, podemos chamar o método new_method da interface do novo sistema e também o método legacy_method da interface do sistema antigo.
+
+O padrão Adapter é útil quando você precisa integrar sistemas existentes com interfaces incompatíveis ou quando deseja criar uma camada de adaptação para permitir que diferentes partes do sistema trabalhem juntas. Isso ajuda a evitar a necessidade de modificar o código existente e a garantir que os sistemas possam colaborar de maneira eficaz.
 
 ### Builder
 “Cria objetos complexos que são difíceis de configurar.”
 
+O padrão de projeto Builder é um padrão de projeto de criação que separa a construção de um objeto complexo de sua representação, permitindo a criação de objetos com diferentes características sem expor os detalhes complexos de construção. É útil quando você tem objetos com muitos parâmetros de configuração ou quando deseja criar um objeto em etapas. Aqui está um exemplo em Ruby que demonstra o padrão Builder:
+```ruby
+# Classe que representa um objeto complexo
+class Product
+  attr_accessor :part1, :part2, :part3
+
+  def initialize
+    @part1 = nil
+    @part2 = nil
+    @part3 = nil
+  end
+
+  def display
+    puts "Part 1: #{@part1}"
+    puts "Part 2: #{@part2}"
+    puts "Part 3: #{@part3}"
+  end
+end
+
+# Builder abstrato
+class Builder
+  def build_part1
+    raise NotImplementedError, "Subclasses must implement build_part1"
+  end
+
+  def build_part2
+    raise NotImplementedError, "Subclasses must implement build_part2"
+  end
+
+  def build_part3
+    raise NotImplementedError, "Subclasses must implement build_part3"
+  end
+end
+
+# ConcretoBuilder que implementa a construção específica
+class ConcreteBuilder < Builder
+  def initialize
+    @product = Product.new
+  end
+
+  def build_part1
+    @product.part1 = "Part 1"
+  end
+
+  def build_part2
+    @product.part2 = "Part 2"
+  end
+
+  def build_part3
+    @product.part3 = "Part 3"
+  end
+
+  def get_product
+    @product
+  end
+end
+
+# Diretor que cria o objeto complexo usando o Builder
+class Director
+  def construct(builder)
+    builder.build_part1
+    builder.build_part2
+    builder.build_part3
+  end
+end
+
+# Uso do padrão Builder
+builder = ConcreteBuilder.new
+director = Director.new
+
+director.construct(builder)
+product = builder.get_product
+
+product.display
+```
+
+Neste exemplo:
+
+* Product é a classe que representa o objeto complexo que desejamos construir. Ela possui várias partes (part1, part2, part3) que precisam ser configuradas.
+* Builder é a classe abstrata que define os métodos para construir as partes do objeto complexo. As subclasses do Builder implementarão esses métodos de acordo com a lógica específica de construção.
+* ConcreteBuilder é uma implementação específica do Builder que cria um objeto Product. Ele implementa os métodos para construir as partes do objeto Product de acordo com a lógica desejada.
+* Director é responsável por orquestrar o processo de construção usando um Builder. Ele chama os métodos do Builder para criar o objeto complexo.
+* O código final demonstra a criação de um objeto Product por meio da combinação de um ConcreteBuilder e um Director. O objeto Product é criado passo a passo, e as partes são configuradas conforme a necessidade.
+
+O padrão Builder é útil quando você tem objetos complexos com muitas opções de configuração e permite a criação flexível de objetos complexos de forma organizada e legível. Também permite a criação de diferentes variantes do objeto complexo usando construtores diferentes, sem a necessidade de modificar a classe principal do objeto.
+
 ### Command
 “Performa uma tarefa específica sem ter qualquer informação do recebedor da requisição.”
+
+O padrão de projeto Command é um padrão de projeto comportamental que encapsula uma solicitação como um objeto, permitindo que você parametrize clientes com solicitações, enfileire solicitações ou registre solicitações e forneça suporte a operações desfazer. Ele é útil quando você deseja desacoplar quem emite uma solicitação de quem a executa.
+Aqui está um exemplo em Ruby que demonstra o padrão Command:
+```ruby
+# Receiver (Destinatário): A classe que realiza a ação real.
+class Light
+  def turn_on
+    puts "Luz ligada."
+  end
+
+  def turn_off
+    puts "Luz desligada."
+  end
+end
+
+# Command (Comando): Define uma interface para todos os comandos concretos.
+class Command
+  def execute
+    raise NotImplementedError, "Subclasses must implement execute"
+  end
+end
+
+# ConcreteCommand (Comando Concreto): Implementa um comando concreto usando um Receiver.
+class TurnOnCommand < Command
+  def initialize(light)
+    @light = light
+  end
+
+  def execute
+    @light.turn_on
+  end
+end
+
+class TurnOffCommand < Command
+  def initialize(light)
+    @light = light
+  end
+
+  def execute
+    @light.turn_off
+  end
+end
+
+# Invoker (Executor): Invoca comandos sem conhecer os detalhes do Receiver.
+class RemoteControl
+  def initialize
+    @commands = {}
+  end
+
+  def add_command(name, command)
+    @commands[name] = command
+  end
+
+  def press_button(name)
+    command = @commands[name]
+    if command
+      command.execute
+    else
+      puts "Botão não configurado."
+    end
+  end
+end
+
+# Uso do padrão Command
+light = Light.new
+turn_on = TurnOnCommand.new(light)
+turn_off = TurnOffCommand.new(light)
+
+remote = RemoteControl.new
+remote.add_command("ligar", turn_on)
+remote.add_command("desligar", turn_off)
+
+remote.press_button("ligar")   # Aciona o comando de ligar a luz
+remote.press_button("desligar") # Aciona o comando de desligar a luz
+remote.press_button("pausar")   # Botão não configurado
+```
+
+Neste exemplo:
+
+* Light é a classe que realiza a ação real, que é ligar e desligar a luz.
+* Command é a classe abstrata que define a interface para todos os comandos concretos.
+* TurnOnCommand e TurnOffCommand são comandos concretos que implementam a interface Command. Eles são responsáveis por chamar os métodos turn_on e turn_off do objeto Light.
+* RemoteControl é o invocador que armazena os comandos e executa-os sem conhecer os detalhes do Receiver. Ele usa os comandos para ligar ou desligar a luz, e também trata botões não configurados.
+
+O padrão Command permite encapsular solicitações como objetos, fornecendo um nível de interação entre objetos que emitem solicitações e os objetos que as executam. Isso torna o sistema mais flexível e extensível, permitindo que você adicione facilmente novos comandos e evite a necessidade de modificar o código do cliente sempre que desejar adicionar uma nova funcionalidade.
 
 ### Decorator
 “Varia a responsabilidade de um objeto adicionando algum recurso.”
