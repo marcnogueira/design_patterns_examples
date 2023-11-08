@@ -4,11 +4,11 @@ RSpec.describe DeliveryStrategy, '#strategy_pattern' do
   context 'with correios rules' do
     let(:correios_delivery) {described_class.new('somewhere', 'correios')}
     
-    it 'show correio delivery cost' do
+    it 'show cost' do
       expect(correios_delivery.cost).to eql 20
     end
 
-    it 'show correio delivery distance' do
+    it 'show distance' do
       expect(correios_delivery.distance).to eql '500 km'
     end
   end
@@ -16,11 +16,11 @@ RSpec.describe DeliveryStrategy, '#strategy_pattern' do
   context 'with tele_entrega rules' do
     let(:tele_entrega_delivery) {described_class.new('somewhere', 'tele_entrega')}
 
-    it 'show tele entrega delivery cost' do
+    it 'show cost' do
       expect(tele_entrega_delivery.cost).to eql 30
     end
 
-    it 'show tele entrega delivery distance' do
+    it 'show distance' do
       expect(tele_entrega_delivery.distance).to eql '500 km'
     end
   end
@@ -28,11 +28,11 @@ RSpec.describe DeliveryStrategy, '#strategy_pattern' do
   context 'with fedex rules' do
     let(:fedex_delivery) {described_class.new('somewhere', 'fedex')}
 
-    it 'show fedex delivery cost' do
+    it 'show cost' do
       expect(fedex_delivery.cost).to eql 80
     end
 
-    it 'show fedex delivery distance' do
+    it 'show distance' do
       expect(fedex_delivery.distance).to eql '500 km'
     end
   end
