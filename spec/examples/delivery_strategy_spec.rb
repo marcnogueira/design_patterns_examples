@@ -36,4 +36,10 @@ RSpec.describe DeliveryStrategy, '#strategy_pattern' do
       expect(fedex_delivery.distance).to eql '500 km'
     end
   end
+
+  context 'with nonexistent strategy' do
+    it 'raise name error' do
+      expect{described_class.new('somewhere', 'somehow')}.to raise_error(NameError)
+    end
+  end
 end
