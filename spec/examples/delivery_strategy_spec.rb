@@ -2,35 +2,38 @@ require_relative '../../examples/strategy/delivery_strategy'
 
 RSpec.describe DeliveryStrategy, '#strategy_pattern' do
   context 'with correios rules' do
+    let(:correios_delivery) {described_class.new('somewhere', 'correios')}
+    
     it 'show correio delivery cost' do
-      delivery = described_class.new('somewhere', 'correios')
-      expect(delivery.cost).to eql 20
+      expect(correios_delivery.cost).to eql 20
     end
+
     it 'show correio delivery distance' do
-      delivery = described_class.new('somewhere', 'correios')
-      expect(delivery.distance).to eql '500 km'
+      expect(correios_delivery.distance).to eql '500 km'
     end
   end
 
   context 'with tele_entrega rules' do
+    let(:tele_entrega_delivery) {described_class.new('somewhere', 'tele_entrega')}
+
     it 'show tele entrega delivery cost' do
-      delivery = described_class.new('somewhere', 'tele_entrega')
-      expect(delivery.cost).to eql 30
+      expect(tele_entrega_delivery.cost).to eql 30
     end
+
     it 'show tele entrega delivery distance' do
-      delivery = described_class.new('somewhere', 'tele_entrega')
-      expect(delivery.distance).to eql '500 km'
+      expect(tele_entrega_delivery.distance).to eql '500 km'
     end
   end
 
   context 'with fedex rules' do
+    let(:fedex_delivery) {described_class.new('somewhere', 'fedex')}
+
     it 'show fedex delivery cost' do
-      delivery = described_class.new('somewhere', 'fedex')
-      expect(delivery.cost).to eql 80
+      expect(fedex_delivery.cost).to eql 80
     end
+
     it 'show fedex delivery distance' do
-      delivery = described_class.new('somewhere', 'fedex')
-      expect(delivery.distance).to eql '500 km'
+      expect(fedex_delivery.distance).to eql '500 km'
     end
   end
 end
