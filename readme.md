@@ -1,4 +1,9 @@
-# ![](readme/design-patterns-logo-2.png)
+# ![](readme/design%20patterns%20titulo.jpg)
+## Introdução
+Inicialmente esse material foi criado para meus próprios estudos, como fonte de referência rápida sobre os Padrões de Projeto com exemplos de aplicação em Ruby. Com as adições dos exemplos de código resolvi criar  esse repositório público, para facilitar a vida de outras pessoas assim como eu sentem falta de algum material adaptado para essa linguagem. 
+Além do material do ReadMe, irão encontrar alguns exemplos práticos de código dentro da pasta de exemplos, todos com cobertura de testes com Rspec.
+Sintam-se a vontade para fazer suas próprias considerações, ou criar seus próprios exemplos de código para rechear ainda mais esse material.
+## O conceito
 Design patterns, ou padrões de projeto, são soluções reutilizáveis para problemas comuns de design de software que surgem durante o desenvolvimento de sistemas de software. Eles são abordagens testadas e comprovadas para lidar com desafios de design específicos e fornecem diretrizes sobre como organizar, estruturar e relacionar componentes de software para alcançar uma arquitetura eficaz e flexível.
 
 Os design patterns não são códigos prontos para uso, mas sim modelos conceituais que descrevem a estrutura e as interações entre objetos e componentes de software. Eles são uma forma de documentar as melhores práticas e soluções bem-sucedidas que a comunidade de desenvolvimento de software identificou ao longo do tempo.
@@ -982,7 +987,7 @@ O livro "Design Patterns: Elements of Reusable Object-Oriented Software" é ampl
 * **Padrões Estruturais**: Lidam com a composição de classes ou objetos para formar estruturas maiores. Eles ajudam a criar relações entre objetos de forma flexível e eficiente. Exemplos incluem o Adapter, Composite, Proxy e Bridge.
 * **Padrões Comportamentais**: Fornecem maneiras de definir a comunicação entre objetos de forma flexível. Eles ajudam a garantir que os objetos possam cooperar de maneira eficiente e reutilizável. Exemplos incluem o Observer, Strategy, Command e State.
 
-![](readme/types_of_patterns.jpg)<!-- {"width":621} -->
+![](readme/Design%20Patterns.png)
 
 O livro "Design Patterns" é frequentemente citado como uma leitura obrigatória para qualquer desenvolvedor de software que deseja compreender melhor a orientação a objetos e a criação de sistemas de software robustos e reutilizáveis. Ele fornece exemplos de código em C++ e Smalltalk, mas os conceitos e princípios dos padrões de projeto são amplamente aplicáveis a muitas linguagens de programação, incluindo Ruby.
 O legado dos "Gang of Four" e seu livro é duradouro, e os padrões de projeto apresentados no livro continuam a ser uma referência essencial para o desenvolvimento de software orientado a objetos. Eles ajudaram a estabelecer uma linguagem comum para discutir e projetar sistemas de software e promoveram a reutilização e a manutenibilidade do código em toda a indústria de desenvolvimento de software.
