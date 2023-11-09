@@ -3,8 +3,8 @@
 Inicialmente esse material foi criado para meus próprios estudos, como fonte de referência rápida sobre os Padrões de Projeto com exemplos de aplicação em Ruby. Com as adições dos exemplos de código resolvi criar  esse repositório público, para facilitar a vida de outras pessoas assim como eu sentem falta de algum material adaptado para essa linguagem. 
 Além do material do ReadMe, irão encontrar alguns exemplos práticos de código dentro da pasta de exemplos, todos com cobertura de testes com Rspec.
 Sintam-se a vontade para fazer suas próprias considerações, ou criar seus próprios exemplos de código para rechear ainda mais esse material.
-## O conceito
-Design patterns, ou padrões de projeto, são soluções reutilizáveis para problemas comuns de design de software que surgem durante o desenvolvimento de sistemas de software. Eles são abordagens testadas e comprovadas para lidar com desafios de design específicos e fornecem diretrizes sobre como organizar, estruturar e relacionar componentes de software para alcançar uma arquitetura eficaz e flexível.
+## O Conceito
+Design Patterns, ou padrões de projeto, são soluções reutilizáveis para problemas comuns de design de software que surgem durante o desenvolvimento de sistemas de software. Eles são abordagens testadas e comprovadas para lidar com desafios de design específicos e fornecem diretrizes sobre como organizar, estruturar e relacionar componentes de software para alcançar uma arquitetura eficaz e flexível.
 
 Os design patterns não são códigos prontos para uso, mas sim modelos conceituais que descrevem a estrutura e as interações entre objetos e componentes de software. Eles são uma forma de documentar as melhores práticas e soluções bem-sucedidas que a comunidade de desenvolvimento de software identificou ao longo do tempo.
 
